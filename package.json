@@ -1,0 +1,13 @@
+{
+  "name": "goto-mathematica",
+  "version": "0.0.1",
+  "main": "./lib/main",
+  "description": "Go-to-definition for Mathematica",
+  "engines": {
+    "atom": "*",
+    "node": "*"
+  },
+  "activationCommands": {
+    "atom-workspace": "goto-mathematica::goto-definition"
+  }
+}
