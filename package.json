@@ -6,8 +6,5 @@
   "engines": {
     "atom": "*",
     "node": "*"
-  },
-  "activationCommands": {
-    "atom-workspace": "goto-mathematica::goto-definition"
   }
 }
