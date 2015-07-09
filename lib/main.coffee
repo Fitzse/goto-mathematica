@@ -40,6 +40,10 @@ module.exports =
     if file.path.endsWith(".m")
       contents = fs.readFileSync(file.path)
       if @regexp.test(contents)
-        atom.workspace.open(file.path)
+        atom.workspace.open(file.path).then (editor) =>
+          editor.scan @regexp, (matchInfo) =>
+            marker = editor.markBufferRange(matchInfo.range)
+            position = marker.getStartScreenPosition()
+            editor.setCursorScreenPosition(position)
         return true
     return false
