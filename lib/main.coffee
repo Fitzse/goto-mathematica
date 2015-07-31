@@ -8,14 +8,17 @@ module.exports =
   activate: ->
     @subscriptions = new CompositeDisposable
     @subscriptions.add atom.commands.add 'atom-text-editor',
-      'goto-mathematica:go-to-definition': => @goto()
+      'goto-mathematica:go-to-definition': => @gotoCursor()
 
   deactivate: ->
     @subscriptions.dispose()
 
-  goto: ->
+  gotoCursor: ->
     editor = atom.workspace.getActivePaneItem()
     word = editor.getWordUnderCursor()
+    @gotoWord(word)
+
+  gotoWord: (word)->
     @regexp = new RegExp("\\b"+word+"\\[.*\\]\\s*:=")
     directories = atom.project.getDirectories()
     found = false
