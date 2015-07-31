@@ -16,7 +16,7 @@ module.exports =
   goto: ->
     editor = atom.workspace.getActivePaneItem()
     word = editor.getWordUnderCursor()
-    @regexp = new RegExp("\\b"+word+"\\[.*\\]:=")
+    @regexp = new RegExp("\\b"+word+"\\[.*\\]\\s*:=")
     directories = atom.project.getDirectories()
     found = false
     index = 0
