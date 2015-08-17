@@ -1,2 +1,3 @@
 'atom-text-editor':
-  'f10': 'goto-mathematica:go-to-definition'
+  'f10': 'goto-mathematica:go-to-cursor'
+  'f9': 'goto-mathematica:go-to-symbol'
