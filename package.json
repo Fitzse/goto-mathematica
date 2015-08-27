@@ -1,15 +1,19 @@
 {
   "name": "goto-mathematica",
-  "version": "0.0.1",
+  "version": "0.0.0",
   "main": "./main",
-  "description": "Go-to-definition for Mathematica",
-  "engines": {
-    "atom": "*",
-    "node": "*"
-  },
+  "description": "Navigate to function definition for Mathematica projects",
   "repository": {
     "type": "git",
-    "url": "https://github.com/fitzse/goto-mathematica.git"
+    "url": "https://github.com/Fitzse/goto-mathematica.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Fitzse/goto-mathematica/issues"
+  },
+  "license": "MIT",
+  "engines": {
+    "atom": ">=1.0.0",
+    "node": ">=0.12.0"
   },
   "dependencies":{
     "atom-space-pen-views": "^2.1.0",
