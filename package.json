@@ -1,6 +1,6 @@
 {
   "name": "goto-mathematica",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "main": "./main",
   "description": "Navigate to function definition for Mathematica projects",
   "repository": {
@@ -15,8 +15,8 @@
     "atom": ">=1.0.0",
     "node": ">=0.12.0"
   },
-  "dependencies":{
+  "dependencies": {
     "atom-space-pen-views": "^2.1.0",
-    "space-pen":"^5.0.1"
+    "space-pen": "^5.0.1"
   }
 }
