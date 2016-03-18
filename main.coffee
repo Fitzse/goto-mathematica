@@ -4,6 +4,10 @@ Search = require './lib/search'
 
 module.exports =
   subscriptions: null
+  config:
+    splitPane:
+      type: 'boolean'
+      default: true
   regexp: ""
 
   activate: ->

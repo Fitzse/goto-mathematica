@@ -1,38 +1,43 @@
 fs = require 'fs'
+_ = require 'underscore-plus'
 {CompositeDisposable} = require 'atom'
 
 module.exports =
   regexp: ""
 
-  gotoWord: (word)->
+  gotoWord: (word) ->
     @regexp = new RegExp("\\b"+word+"\\[.*\\]\\s*:=")
     directories = atom.project.getDirectories()
-    found = false
-    index = 0
-    while !found and index < directories.length
-      found = @testPath directories[index]
-      index++
+    path = @testPaths directories
+    if _.isString(path)
+      options = {}
+      if atom.config.get('goto-mathematica.splitPane')
+        options.pending = true
+        options.split = 'right'
+      atom.workspace.open(path,options).then (editor) =>
+        editor.scan @regexp, (matchInfo) =>
+          marker = editor.markBufferRange(matchInfo.range)
+          position = marker.getStartScreenPosition()
+          editor.setCursorScreenPosition(position)
+          
+  testPaths: (files) ->
+    reducer = (foundPath, path) =>
+      if _.isString(foundPath)
+        return foundPath
+      return @testPath path
+    return _.reduce files, reducer, false
 
   testPath: (file) ->
-    found = false
     if file.isFile()
       return @testFile(file)
     else if !file.path.includes(".git") and !file.path.includes("Tests")
       entries = file.getEntriesSync()
-      index = 0
-      while !found and index < entries.length
-        found = @testPath entries[index]
-        index++
-    return found
+      return @testPaths entries
+    return false
 
   testFile: (file) ->
     if file.path.endsWith(".m")
       contents = fs.readFileSync(file.path)
       if @regexp.test(contents)
-        atom.workspace.open(file.path).then (editor) =>
-          editor.scan @regexp, (matchInfo) =>
-            marker = editor.markBufferRange(matchInfo.range)
-            position = marker.getStartScreenPosition()
-            editor.setCursorScreenPosition(position)
-        return true
+        return file.path
     return false

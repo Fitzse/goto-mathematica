@@ -12,11 +12,12 @@
   },
   "license": "MIT",
   "engines": {
-    "atom": ">=1.0.0",
+    "atom": ">=1.6.0",
     "node": ">=0.12.0"
   },
   "dependencies": {
     "atom-space-pen-views": "^2.1.0",
-    "space-pen": "^5.0.1"
+    "space-pen": "^5.0.1",
+    "underscore-plus": "^1.6.6"
   }
 }
