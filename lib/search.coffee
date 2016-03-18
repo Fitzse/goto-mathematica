@@ -10,7 +10,11 @@ module.exports =
     directories = atom.project.getDirectories()
     path = @testPaths directories
     if _.isString(path)
-      atom.workspace.open(path).then (editor) =>
+      options = {}
+      if atom.config.get('goto-mathematica.splitPane')
+        options.pending = true
+        options.split = 'right'
+      atom.workspace.open(path,options).then (editor) =>
         editor.scan @regexp, (matchInfo) =>
           marker = editor.markBufferRange(matchInfo.range)
           position = marker.getStartScreenPosition()
