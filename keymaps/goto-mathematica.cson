@@ -1,3 +1,5 @@
 'atom-text-editor':
   'f10': 'goto-mathematica:go-to-cursor'
+  'shift-f10': 'goto-mathematica:go-to-cursor-pane'
   'f9': 'goto-mathematica:go-to-symbol'
+  'shift-f9': 'goto-mathematica:go-to-symbol-pane'

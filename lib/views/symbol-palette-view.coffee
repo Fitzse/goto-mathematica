@@ -8,6 +8,8 @@ class SymbolPaletteView extends View
     @div class: 'symbol-palette', =>
       @div ''
       @subview 'symbolPaletteView', new TextEditorView(mini: true)
+  
+  @openInPane: false
 
   initialize: ->
     atom.commands.add @element,
@@ -19,7 +21,8 @@ class SymbolPaletteView extends View
         @cancel()
         event.stopPropagation()
 
-  show: ->
+  show: (openPane) ->
+    @openInPane = openPane
     @panel ?=atom.workspace.addModalPanel(item: this)
     @symbolPaletteView.focus()
 
@@ -37,5 +40,5 @@ class SymbolPaletteView extends View
   cancel: -> @hide()
 
   confirm: ->
-    Search.gotoWord(@symbolPaletteView.getText())
+    Search.gotoWord(@symbolPaletteView.getText(), @openInPane)
     @hide()
