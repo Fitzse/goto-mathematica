@@ -19,6 +19,7 @@ module.exports =
           marker = editor.markBufferRange(matchInfo.range)
           position = marker.getStartScreenPosition()
           editor.setCursorScreenPosition(position)
+          editor.scrollToScreenPosition(position,{center:true})
           
   testPaths: (files) ->
     reducer = (foundPath, path) =>
