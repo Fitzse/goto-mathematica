@@ -5,13 +5,13 @@ _ = require 'underscore-plus'
 module.exports =
   regexp: ""
 
-  gotoWord: (word) ->
+  gotoWord: (word, openPane) ->
     @regexp = new RegExp("\\b"+word+"\\[.*\\]\\s*:=")
     directories = atom.project.getDirectories()
     path = @testPaths directories
     if _.isString(path)
       options = {}
-      if atom.config.get('goto-mathematica.splitPane')
+      if openPane 
         options.pending = true
         options.split = 'right'
       atom.workspace.open(path,options).then (editor) =>
@@ -19,6 +19,7 @@ module.exports =
           marker = editor.markBufferRange(matchInfo.range)
           position = marker.getStartScreenPosition()
           editor.setCursorScreenPosition(position)
+          editor.scrollToScreenPosition(position,{center:true})
           
   testPaths: (files) ->
     reducer = (foundPath, path) =>
